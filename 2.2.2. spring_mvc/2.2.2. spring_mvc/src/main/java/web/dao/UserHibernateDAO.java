@@ -58,6 +58,15 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        User user = (User) sessionFactory.getCurrentSession()
+                .createQuery("from User WHERE login= :login")
+                .setParameter("login", login)
+                .uniqueResult();
+        return user;
+    }
+
+    @Override
     public boolean isExistLogin(String login) {
         User user = (User) sessionFactory.getCurrentSession()
                 .createQuery("from User WHERE login= :login")

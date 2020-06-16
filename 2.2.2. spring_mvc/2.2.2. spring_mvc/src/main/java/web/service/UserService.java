@@ -15,5 +15,7 @@ public interface UserService {
 
     public User getUserByLogAndPass(String login, String password);
 
+    User getUserByLogin(String login);
+
     boolean isExistLogin(String login);
 }

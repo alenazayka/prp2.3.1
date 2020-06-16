@@ -1,13 +1,13 @@
 package web.model;
-
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User{
 
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -26,37 +26,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    public String getLogin() {
-        return login;
-    }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public User(){
-
-    }
-
-    public User(int id, String name, int age) {
-        this.name = name;
-        this.age = age;
+    public User() {
     }
 
     public User(int id, String name, int age, String login, String password, String role) {
@@ -84,12 +56,24 @@ public class User {
         this.name = name;
     }
 
+
     public void setAge(int age) {
         this.age = age;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-    public int getId() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -101,12 +85,17 @@ public class User {
         return age;
     }
 
-
+    public String getRole() {
+        return role;
+    }
 
 
     @Override
     public int hashCode() {
         int result = 31 + name.hashCode();
+        result = 31 * result + login.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + role.hashCode();
         result = 31 * result + (age * 131 << 18);
         return result;
     }
@@ -118,12 +107,16 @@ public class User {
 
         User other = (User) obj;
         if (!other.name.equals(name)) return false;
-        if (other.age == age) return false;
-        return true;
+        if (!(other.age == age)) return false;
+        if (!(other.login.equals(login))) return false;
+        if (!(other.password.equals(password))) return false;
+        return other.role.equals(role);
     }
 
     @Override
     public String toString() {
-        return "User{" + name + ", " + age + " лет}";
+        return "User{" +
+                name + " " +
+                age + " лет}";
     }
 }

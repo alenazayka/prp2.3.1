@@ -8,7 +8,6 @@ import org.springframework.web.context.request.WebRequest;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,17 +21,17 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
+    @GetMapping(value = "user")
     public String userPageGet() {
         return "userPage";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String loginUserGet() {
         return "starterPage";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @PostMapping(value = "")
     public String loginUserPost(WebRequest webRequest, ModelMap model) {
         String login = webRequest.getParameter("login");
         String password = webRequest.getParameter("password");
@@ -45,7 +44,7 @@ public class UsersController {
     }
 
 
-    @RequestMapping(value = "admin", method = RequestMethod.GET)
+    @GetMapping(value = "admin")
     public String printUsers(ModelMap model) {
         List<User> userList = userService.getAllUsers();
 
@@ -53,12 +52,12 @@ public class UsersController {
         return "admin/user-list";
     }
 
-    @RequestMapping(value = "/admin/new", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/new")
     public String addUserGet() {
         return "admin/user-form";
     }
 
-    @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/add")
     public String addUserPost(WebRequest webRequest, ModelMap model) {
         try {
             String name = webRequest.getParameter("name");
@@ -89,7 +88,7 @@ public class UsersController {
     }
 
 
-    @RequestMapping(value = "/admin/update", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/update")
     public String updateUserGet(@RequestParam(value = "id") String idStr, ModelMap model) {
         User user;
         try {
@@ -108,7 +107,7 @@ public class UsersController {
     }
 
 
-    @RequestMapping(value = "/admin/update", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/update")
     public String editUserPost(WebRequest webRequest, ModelMap model) {
         try {
 
@@ -135,7 +134,7 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/delete")
     public String deleteUserGet(WebRequest webRequest, ModelMap model) {
         try {
             int id = Integer.parseInt(Objects.requireNonNull(webRequest.getParameter("id")));

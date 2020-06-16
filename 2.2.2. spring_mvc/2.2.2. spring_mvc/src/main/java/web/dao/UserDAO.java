@@ -14,5 +14,6 @@ public interface UserDAO {
 
     public User getUserByLogAndPass(String login, String password);
     public boolean isExistLogin(String login);
+    User getUserByLogin(String login);
 
 }
