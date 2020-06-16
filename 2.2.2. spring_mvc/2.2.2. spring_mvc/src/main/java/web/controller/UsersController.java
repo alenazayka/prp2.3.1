@@ -97,7 +97,7 @@ public class UsersController {
                 model.addAttribute("errorText", "This user doesn't exist.");
                 return "error";
             }
-            model.addAttribute("userForEdit", user);
+            model.addAttribute("user", user);
             return "admin/user-form";
         } catch (Exception e) {
             model.addAttribute("errorText", "Error while processing user.");
@@ -126,7 +126,7 @@ public class UsersController {
                 model.addAttribute("errorText", "Error while processing user edit.");
                 return "error";
             }
-            return "redirect:admin";
+            return "redirect:/admin";
         } catch (Exception e) {
             model.addAttribute("errorText", "Error while processing user.");
             return "error";

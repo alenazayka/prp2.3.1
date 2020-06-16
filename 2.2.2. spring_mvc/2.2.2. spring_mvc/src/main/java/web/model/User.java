@@ -77,6 +77,10 @@ public class User{
         return password;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     public long getId() {
         return id;
     }

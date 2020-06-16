@@ -10,32 +10,32 @@
 	<center>
 		<h1>User Management</h1>
         <h2>
-        	<a href="/admin/new">Add New User</a>
+        	<a href="${pageContext.request.contextPath}/admin/new">Add New User</a>
         	&nbsp;&nbsp;&nbsp;
-        	<a href="/admin">List All Users</a>
+        	<a href="${pageContext.request.contextPath}/admin">List All Users</a>
 
         </h2>
 	</center>
     <div align="center">
 		<c:if test="${user != null}">
-			<form action="/admin/update" method="post">
+			<form action="${pageContext.request.contextPath}/admin/update" method="post">
         </c:if>
         <c:if test="${user == null}">
-			<form action="/admin/add" method="post">
+			<form action="${pageContext.request.contextPath}/admin/add" method="post">
         </c:if>
         <table border="1" cellpadding="5">
             <caption>
             	<h2>
-            		<c:if test="${userForEdit != null}">
+            		<c:if test="${user != null}">
             			Edit User
             		</c:if>
-            		<c:if test="${userForEdit == null}">
+            		<c:if test="${user == null}">
             			Add New User
             		</c:if>
             	</h2>
             </caption>
-        		<c:if test="${userForEdit != null}">
-        			<input type="hidden" name="id" value="<c:out value='${userForEdit.id}' />" />
+        		<c:if test="${user != null}">
+        			<input type="hidden" name="id" value="<c:out value='${user.id}' />" />
         		</c:if>
 
 
@@ -44,7 +44,7 @@
                 <th>User Name: </th>
                 <td>
                 	<input type="text" name="name" size="45"
-                			value="<c:out value='${userForEdit.name}' />"
+                			value="<c:out value='${user.name}' />"
                 		/>
                 </td>
             </tr>
@@ -52,7 +52,7 @@
                 <th>User Age: </th>
                 <td>
                 	<input type="text" name="age" size="45"
-                			value="<c:out value='${userForEdit.age}' />"
+                			value="<c:out value='${user.age}' />"
                 	/>
                 </td>
             </tr>
@@ -60,7 +60,7 @@
                 <th>Login: </th>
                 <td>
                 	<input type="text" name="login" size="15"
-                			value="<c:out value='${userForEdit.login}' />"
+                			value="<c:out value='${user.login}' />"
                 	/>
                 </td>
             </tr>
@@ -68,7 +68,7 @@
 				<th>Password: </th>
 				<td>
 					<input type="text" name="password" size="15"
-						   value="<c:out value='${userForEdit.password}' />"
+						   value="<c:out value='${user.password}' />"
 					/>
 				</td>
 			</tr>
@@ -76,7 +76,7 @@
 				<th>Role: </th>
 				<td>
 					<input type="text" name="role" size="15"
-						   value="<c:out value='${userForEdit.role}' />"
+						   value="<c:out value='${user.role}' />"
 					/>
 				</td>
 			</tr>
