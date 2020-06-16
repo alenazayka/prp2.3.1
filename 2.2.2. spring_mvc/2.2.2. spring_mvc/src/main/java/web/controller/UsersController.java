@@ -136,8 +136,14 @@ public class UsersController {
     @GetMapping(value = "/admin/delete")
     public String deleteUserGet(WebRequest webRequest, ModelMap model) {
         try {
+            String name = webRequest.getParameter("name");
+            int age = Integer.parseInt(Objects.requireNonNull(webRequest.getParameter("age")));
             int id = Integer.parseInt(Objects.requireNonNull(webRequest.getParameter("id")));
-            if (!userService.deleteUser(id)) {
+            String login = webRequest.getParameter("login");
+            String password = webRequest.getParameter("password");
+            String role = webRequest.getParameter("role");
+            User user = new User(id, name, age, login, password, role);
+            if (!userService.deleteUser(user)) {
                 model.addAttribute("errorText", "Error while processing user edit.");
                 return "error";
             }
