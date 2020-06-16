@@ -1,11 +1,9 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDAO;
-import web.dao.UserHibernateDAO;
 import web.model.User;
 
 import java.util.List;
@@ -16,13 +14,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Transactional
     @Override
     public boolean addUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDAO.addUser(user);
         return true;
     }
@@ -35,8 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public boolean deleteUser(int id) {
-        userDAO.deleteUser(id);
+    public boolean deleteUser(User user) {
+        userDAO.deleteUser(user);
         return true;
     }
 
@@ -53,11 +47,6 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Transactional(readOnly = true)
-    @Override
-    public User getUserByLogAndPass(String login, String password) {
-        return userDAO.getUserByLogAndPass(login, password);
-    }
 
     @Transactional(readOnly = true)
     @Override

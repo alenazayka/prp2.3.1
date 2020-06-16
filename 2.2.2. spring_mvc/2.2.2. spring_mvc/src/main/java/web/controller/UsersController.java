@@ -34,8 +34,7 @@ public class UsersController {
     @PostMapping(value = "")
     public String loginUserPost(WebRequest webRequest, ModelMap model) {
         String login = webRequest.getParameter("login");
-        String password = webRequest.getParameter("password");
-        if (userService.getUserByLogAndPass(login, password) == null) {
+        if (userService.getUserByLogin(login) == null) {
             model.addAttribute("errorText", "No user with this data exists");
             return "error";
         } else {

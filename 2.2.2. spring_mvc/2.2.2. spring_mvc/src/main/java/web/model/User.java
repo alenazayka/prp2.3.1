@@ -73,6 +73,10 @@ public class User{
         this.role = role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public long getId() {
         return id;
     }
@@ -119,4 +123,6 @@ public class User{
                 name + " " +
                 age + " лет}";
     }
+
+
 }
